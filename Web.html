@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPT Polytechnic - Thực học, Thực nghiệp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        fptOrange: '#F36F21',
+                        fptBlue: '#1b75bc',
+                        fptDarkBlue: '#0a325a',
+                        headerNavy: '#1d2440',
+                        fptBrightBlue: '#0096ff'
+                    },
+                    backgroundImage: {
+                        'orange-gradient': 'linear-gradient(to right, #f97316, #ea580c)',
+                        'blue-gradient': 'linear-gradient(to bottom, #dbeafe, #ffffff)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+        .gradient-text {
+            background: linear-gradient(to right, #ea580c, #f97316);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-glow:hover { box-shadow: 0 0 20px rgba(243, 111, 33, 0.6); }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: floating 4s ease-in-out infinite; }
+        .animate-float-delayed { animation: floating 5s ease-in-out infinite 2s; }
+        .slide-fade { transition: opacity 0.8s ease-in-out; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div id="trang-tin-tuc" class="block bg-white pb-10">
+        <header class="bg-headerNavy text-white w-full font-sans shadow-md sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-end items-center py-2 text-[12px] gap-6 border-b border-white/10">
+                    <div class="flex items-center gap-2 hover:text-gray-300 cursor-pointer transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+                        <span>caodang@fpt.edu.vn</span>
+                    </div>
+                    <div class="flex items-center gap-2 hover:text-gray-300 cursor-pointer transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                        <span>024 6327 6402/0981 725 836</span>
+                    </div>
+                    <a href="#" class="hover:text-gray-300 transition">Liên hệ</a>
+                </div>
+                <div class="flex items-center py-3">
+                    <div onclick="chuyenTrang()" class="flex items-center cursor-pointer shrink-0 hover:opacity-80 transition" title="Chuyển sang Landing Page">
+                        <img src="src/FPT_Polytechnic.png" alt="Logo FPT" class="h-10 w-auto object-contain">
+                    </div>
+                    <nav class="hidden lg:flex items-center ml-auto gap-6 text-[13px] font-medium tracking-wide">
+                        <a href="#" class="flex items-center gap-1 hover:text-[#F36F21] transition uppercase whitespace-nowrap">Giới thiệu chung <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="flex items-center gap-1 hover:text-[#F36F21] transition uppercase whitespace-nowrap">Tuyển sinh <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="flex items-center gap-1 hover:text-[#F36F21] transition uppercase whitespace-nowrap">Chương trình đào tạo <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="flex items-center gap-1 hover:text-[#F36F21] transition uppercase whitespace-nowrap">Hoạt động SV <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="hover:text-[#F36F21] transition uppercase whitespace-nowrap">Tin học bổng</a>
+                        <a href="#" class="hover:text-[#F36F21] transition uppercase whitespace-nowrap">Thi TN THPT</a>
+                        <a href="#" class="flex items-center gap-1 hover:text-[#F36F21] transition uppercase whitespace-nowrap">Tuyển dụng <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="flex items-center gap-1 hover:text-[#F36F21] transition uppercase whitespace-nowrap">Liên hệ <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col lg:flex-row gap-10">
+            <div class="lg:w-3/4" data-aos="fade-right">
+                <div class="text-sm text-gray-500 mb-6 flex items-center gap-2 font-medium">
+                    <span class="hover:text-fptOrange cursor-pointer">Trang chủ</span> <span class="text-gray-400">›</span> <span class="hover:text-fptOrange cursor-pointer">Hoạt động sinh viên</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold text-[#0a325a] mb-4 leading-snug">Tổng kết cuộc thi MOS AI 2025: Hành trình sáng tạo, bứt phá</h1>
+                <div class="text-sm text-gray-500 mb-8 flex items-center gap-4 border-b border-gray-200 pb-4">
+                    <span>📅 12/04/2026</span><span>✍️ Ban Truyền Thông</span><span>👁️ Lượt xem: 1,245</span>
+                </div>
+                <p class="text-gray-800 leading-relaxed mb-6 text-justify font-medium">Sáng ngày 12/04, Trường Cao đẳng FPT Polytechnic đã tổ chức thành công lễ tổng kết và trao giải cuộc thi MOS AI 2025. Sự kiện thu hút sự tham gia của hàng trăm sinh viên đam mê công nghệ và trí tuệ nhân tạo, mang đến những dự án vô cùng ấn tượng và mang tính ứng dụng cao.</p>
+                
+                <div class="relative w-full h-[400px] mb-6 rounded-lg overflow-hidden shadow-md group bg-gray-200">
+                    <div id="main-video-thumb" class="absolute inset-0 cursor-pointer z-10 flex items-center justify-center bg-black" onclick="playMainVideo()">
+                        <img src="https://img.youtube.com/vi/6ezgcBs8HFo/maxresdefault.jpg" alt="Video Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-20 h-14 bg-[#ff0000] rounded-xl flex items-center justify-center text-white shadow-lg transform transition group-hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="main-video-iframe-container" class="absolute inset-0 hidden z-0">
+                        <iframe id="main-video-iframe" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <p class="text-gray-700 leading-relaxed mb-6 text-justify">Cuộc thi không chỉ là sân chơi học thuật mà còn là cơ hội để các bạn trẻ cọ xát, rèn luyện kỹ năng làm việc nhóm...</p>
+                
+                <div class="bg-fptOrange rounded-lg p-8 shadow-md mt-10" data-aos="zoom-in">
+                    <h3 class="text-white font-black text-xl mb-2 uppercase">Đăng ký xét tuyển trực tuyến</h3>
+                    <p class="text-white mb-6 text-sm">Điền thông tin để cán bộ tuyển sinh liên hệ hỗ trợ bạn nhanh nhất</p>
+                    <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Họ tên *" class="p-2.5 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <input type="text" placeholder="Điện thoại *" class="p-2.5 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <select class="p-2.5 rounded text-sm text-gray-500 focus:outline-none"><option>-- Chọn Cơ sở --</option></select>
+                        <select class="p-2.5 rounded text-sm text-gray-500 focus:outline-none"><option>-- Chọn Ngành --</option></select>
+                        <div class="md:col-span-2 text-left mt-2"><button type="button" class="bg-fptBlue text-white font-bold px-8 py-2.5 rounded hover:bg-blue-800 transition shadow">GỬI ĐĂNG KÝ</button></div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="lg:w-1/4 shrink-0" data-aos="fade-left">
+                
+                <div class="flex flex-col border-t border-l border-r border-[#f27024] bg-white">
+                    <a href="#" class="border-b border-[#f27024] text-[#f27024] font-bold text-[12.5px] uppercase flex justify-between items-center p-3.5 hover:bg-[#f27024] hover:text-white transition group">
+                        <span>Thông báo tuyển sinh</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    </a>
+                    <a href="#" class="border-b border-[#f27024] text-[#f27024] font-bold text-[12.5px] uppercase flex justify-between items-center p-3.5 hover:bg-[#f27024] hover:text-white transition group">
+                        <span>Chương trình đào tạo</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" /></svg>
+                    </a>
+                    <a href="#" class="border-b border-[#f27024] text-[#f27024] font-bold text-[12.5px] uppercase flex justify-between items-center p-3.5 hover:bg-[#f27024] hover:text-white transition group">
+                        <span>Quy chế tuyển sinh</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </a>
+                    <a href="#" class="border-b border-[#f27024] text-[#f27024] font-bold text-[12.5px] uppercase flex justify-between items-center p-3.5 hover:bg-[#f27024] hover:text-white transition group">
+                        <span>Phiếu đăng ký học</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    </a>
+                    <a href="#" class="border-b border-[#f27024] text-[#f27024] font-bold text-[12.5px] uppercase flex justify-between items-center p-3.5 hover:bg-[#f27024] hover:text-white transition group">
+                        <span>Hướng dẫn nhập học</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" /></svg>
+                    </a>
+                    <a href="#" class="border-b border-[#f27024] text-[#f27024] font-bold text-[12.5px] uppercase flex justify-between items-center p-3.5 hover:bg-[#f27024] hover:text-white transition group">
+                        <span>Học phí</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
+                    </a>
+                    <a href="#" class="border-b border-[#f27024] text-[#f27024] font-bold text-[12.5px] uppercase flex justify-between items-center p-3.5 hover:bg-[#f27024] hover:text-white transition group">
+                        <span>Câu hỏi thường gặp</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </a>
+                </div>
+
+                <h3 class="text-[17px] font-black text-[#0a325a] mb-5 mt-10 uppercase border-b border-gray-200 pb-2">Tin nổi bật</h3>
+                <div class="flex flex-col gap-4">
+                    <div class="flex gap-3 cursor-pointer group">
+                        <div class="w-20 h-16 shrink-0 bg-gray-200 object-cover border border-gray-200 overflow-hidden">
+                            <img src="src/image3-15-500x500.jpg" alt="" class="w-full h-full object-cover transform group-hover:scale-110 transition bg-blue-50">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <h4 class="text-[13px] font-bold text-gray-800 leading-snug group-hover:text-fptOrange transition line-clamp-3">Khát nhân lực ngành Điện - Tự động hóa: Cơ hội vàng cho thế hệ trẻ bứt phá</h4>
+                            <p class="text-[11px] text-gray-400 mt-1">12/04/2026</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 cursor-pointer group">
+                        <div class="w-20 h-16 shrink-0 bg-gray-200 object-cover border border-gray-200 overflow-hidden">
+                            <img src="src/IMG_0451-500x500.jpg" alt="" class="w-full h-full object-cover transform group-hover:scale-110 transition bg-green-50">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <h4 class="text-[13px] font-bold text-gray-800 leading-snug group-hover:text-fptOrange transition line-clamp-3">Sinh viên Quản trị dịch vụ Du lịch & Lữ hành cơ sở Hà Nội "thực chiến" tại VITM 2026</h4>
+                            <p class="text-[11px] text-gray-400 mt-1">12/04/2026</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 cursor-pointer group">
+                        <div class="w-20 h-16 shrink-0 bg-gray-200 object-cover border border-gray-200 overflow-hidden">
+                            <img src="src/z7706306806117_50bce58d0c47bc5c3a8ff59d975b84a7-500x500.jpg" alt="" class="w-full h-full object-cover transform group-hover:scale-110 transition bg-orange-50">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <h4 class="text-[13px] font-bold text-gray-800 leading-snug group-hover:text-fptOrange transition line-clamp-3">Hành trình chinh phục danh hiệu TOP Sinh viên tiêu biểu - Câu chuyện từ sinh viên Lập trình Game</h4>
+                            <p class="text-[11px] text-gray-400 mt-1">12/04/2026</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 mb-10 cursor-pointer hover:opacity-90 transition shadow-sm rounded overflow-hidden">
+                    <img src="src/banner-t5-sl.png" alt="Banner Tuyển Sinh" class="w-full object-cover min-h-[250px] bg-blue-100">
+                </div>
+
+                <h3 class="text-[17px] font-black text-fptOrange uppercase mb-4">POLY ON YOUTUBE</h3>
+                
+                <div class="relative w-full h-[150px] bg-gray-800 rounded border border-gray-200 overflow-hidden shadow-sm group">
+                    <div id="side-video-thumb" class="absolute inset-0 cursor-pointer z-10 flex items-center justify-center bg-black" onclick="playSideVideo()">
+                        <img src="https://img.youtube.com/vi/Wxiwx-L6R0s/hqdefault.jpg" alt="Youtube" class="w-full h-full object-cover opacity-80 transition transform group-hover:scale-105">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-[#ff0000] rounded-full flex items-center justify-center text-white shadow-lg transform transition group-hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="side-video-iframe-container" class="absolute inset-0 hidden z-0">
+                        <iframe id="side-video-iframe" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="trang-landing-page" class="hidden">
+        
+        <header class="bg-white text-[#1d2440] w-full font-sans shadow-md sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex items-center justify-between py-3">
+                    <div onclick="chuyenTrang()" class="flex items-center cursor-pointer shrink-0 hover:opacity-80 transition" title="Chuyển sang Tin Tức">
+                        <img src="src/FPT_Polytechnic.png" alt="Logo FPT" class="h-10 w-auto object-contain">
+                    </div>
+                    
+                    <nav class="hidden lg:flex items-center gap-3 xl:gap-6 text-[12px] xl:text-[14px] font-bold text-gray-700 ml-auto">
+                        <a href="#" class="flex items-center gap-1 hover:text-fptOrange transition whitespace-nowrap">Giới thiệu chung <svg class="h-3 w-3 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="flex items-center gap-1 hover:text-fptOrange transition whitespace-nowrap">Tuyển sinh <svg class="h-3 w-3 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="flex items-center gap-1 hover:text-fptOrange transition whitespace-nowrap">Chương trình đào tạo <svg class="h-3 w-3 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="flex items-center gap-1 hover:text-fptOrange transition whitespace-nowrap">Hoạt động SV <svg class="h-3 w-3 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="hover:text-fptOrange transition whitespace-nowrap">Tin học bổng</a>
+                        <a href="#" class="hover:text-fptOrange transition whitespace-nowrap">Thi TN THPT</a>
+                        <a href="#" class="flex items-center gap-1 hover:text-fptOrange transition whitespace-nowrap">Tuyển dụng <svg class="h-3 w-3 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                        <a href="#" class="flex items-center gap-1 hover:text-fptOrange transition whitespace-nowrap">Liên hệ <svg class="h-3 w-3 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></a>
+                    </nav>
+                    
+                    <div class="hidden lg:flex items-center text-fptOrange font-bold text-[14px] xl:text-lg gap-1 xl:gap-2 cursor-pointer hover:opacity-80 transition shrink-0 ml-4 xl:ml-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xl:h-6 xl:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                        <span class="whitespace-nowrap">Hotline: 0981725836</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="relative bg-blue-gradient w-full h-[550px] overflow-hidden" id="hero-carousel-section">
+            <div class="absolute top-0 left-10 w-64 h-64 bg-white opacity-40 rounded-full blur-3xl animate-float z-0"></div>
+            <div class="absolute bottom-10 right-20 w-96 h-96 bg-blue-200 opacity-50 rounded-full blur-3xl animate-float-delayed z-0"></div>
+
+            <div id="carousel-slides-container" class="relative w-full h-full z-10">
+                <div class="carousel-slide slide-fade absolute inset-0 w-full h-full opacity-100 z-10 flex flex-col md:flex-row items-center justify-between px-4 max-w-7xl mx-auto">
+                    <div class="text-center md:text-left md:w-1/2 mt-10 md:mt-0">
+                        <p class="text-fptOrange font-black tracking-widest mb-2 text-lg drop-shadow-sm uppercase">Tuyển sinh 2026</p>
+                        <h2 class="text-4xl md:text-[55px] font-black text-[#0a325a] mb-2 drop-shadow-sm leading-[1.1]">Q&A GIẢI MÃ NGHỀ NGHIỆP</h2>
+                        <h2 class="text-3xl md:text-4xl font-black text-fptOrange mb-6 drop-shadow-sm uppercase">Cùng FPT Polytechnic</h2>
+                        <button class="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-10 py-3.5 rounded-full font-bold text-lg shadow-lg hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] transition transform hover:-translate-y-1">LÀM BÀI TEST NGAY</button>
+                    </div>
+                    <div class="hidden md:flex w-1/2 justify-end">
+                        <div class="w-[600px] h-[350px] bg-white/60 backdrop-blur-sm border-2 border-white rounded-3xl flex items-center justify-center text-blue-500 font-bold shadow-xl animate-float overflow-hidden">
+                            <img src="src/8c2a75c51d599307ca48.jpg" alt="Slide 1" class="w-full h-full object-cover bg-gray-100">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide slide-fade absolute inset-0 w-full h-full opacity-0 z-0 flex flex-col md:flex-row items-center justify-between px-4 max-w-7xl mx-auto bg-orange-50">
+                    <div class="text-center md:text-left md:w-1/2 mt-10 md:mt-0">
+                        <p class="text-fptOrange font-black tracking-widest mb-2 text-lg uppercase">Chào Tân Sinh Viên</p>
+                        <h2 class="text-4xl md:text-6xl font-black text-fptOrange mb-2 drop-shadow-sm leading-tight">NỘP HỒ SƠ</h2>
+                        <h2 class="text-4xl md:text-6xl font-black text-[#0a325a] mb-8 drop-shadow-sm leading-tight">ONLINE 2026</h2>
+                        <button class="bg-orange-gradient text-white px-10 py-3.5 rounded-full font-bold text-lg shadow-lg hover:shadow-[0_0_20px_rgba(243,111,33,0.5)] transition transform hover:-translate-y-1">ĐĂNG KÝ NGAY</button>
+                    </div>
+                    <div class="hidden md:flex w-1/2 justify-end">
+                        <div class="w-[600px] h-[350px] bg-white/60 backdrop-blur-sm border-2 border-white rounded-3xl flex items-center justify-center text-orange-500 font-bold shadow-xl animate-float-delayed overflow-hidden">
+                            <img src="src/hero-img2.png" alt="Slide 2" class="w-full h-full object-cover bg-gray-100">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-slide slide-fade absolute inset-0 w-full h-full opacity-0 z-0 flex flex-col md:flex-row items-center justify-between px-4 max-w-7xl mx-auto">
+                    <div class="text-center md:text-left md:w-1/2 mt-10 md:mt-0">
+                        <p class="text-[#0a325a] font-black tracking-widest mb-2 text-lg uppercase">Chính Thức</p>
+                        <h2 class="text-4xl md:text-[55px] font-black text-fptBlue mb-2 drop-shadow-sm leading-[1.1] uppercase">Mở Khóa Tuyển Sinh</h2>
+                        <h2 class="text-4xl md:text-[55px] font-black text-fptOrange mb-8 drop-shadow-sm leading-[1.1] uppercase">Tháng 5/2026</h2>
+                        <div class="flex gap-4 mb-6 justify-center md:justify-start">
+                            <span class="bg-[#1b75bc] text-white px-4 py-2 rounded-full text-sm font-bold shadow">Học Nhanh 2 Năm</span>
+                            <span class="bg-[#1b75bc] text-white px-4 py-2 rounded-full text-sm font-bold shadow">Thực Học Thực Nghiệp</span>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex w-1/2 justify-end">
+                        <div class="w-[600px] h-[350px] bg-white/60 backdrop-blur-sm border-2 border-white rounded-3xl flex items-center justify-center text-blue-500 font-bold shadow-xl animate-float overflow-hidden">
+                            <img src="src/hero-img1.png" alt="Slide 3" class="w-full h-full object-cover bg-gray-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="prevSlide()" class="absolute left-4 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 bg-white/50 backdrop-blur hover:bg-white rounded-full flex items-center justify-center text-[#0a325a] shadow transition focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button onclick="nextSlide()" class="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 bg-white/50 backdrop-blur hover:bg-white rounded-full flex items-center justify-center text-[#0a325a] shadow transition focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
+
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex gap-3">
+                <button onclick="goToSlide(0)" class="carousel-dot w-3 h-3 rounded-full bg-fptOrange shadow transition duration-300 w-8"></button>
+                <button onclick="goToSlide(1)" class="carousel-dot w-3 h-3 rounded-full bg-white shadow transition duration-300"></button>
+                <button onclick="goToSlide(2)" class="carousel-dot w-3 h-3 rounded-full bg-white shadow transition duration-300"></button>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-4 relative -mt-24 z-20" data-aos="fade-up" data-aos-duration="800">
+            <div class="bg-white/95 backdrop-blur-md rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-8 md:p-12 border border-gray-100">
+                <div class="flex justify-center mb-5">
+                    <div class="bg-orange-50 text-fptOrange font-bold px-4 py-1.5 rounded-full text-[13px] flex items-center gap-2 border border-orange-100 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                        Chinh phục học bổng
+                    </div>
+                </div>
+                <div class="text-center mb-10">
+                    <h3 class="text-3xl md:text-4xl font-black text-[#f27024] uppercase tracking-wide mb-3">BẠN ĐỦ BẢN LĨNH CHINH PHỤC HỌC BỔNG?</h3>
+                    <p class="text-gray-600 text-[15px]">Đăng ký ngay để nhận tư vấn chi tiết về chương trình học bổng</p>
+                </div>
+                <form class="flex flex-col gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="flex flex-col gap-2 text-left">
+                            <label class="text-[13px] font-bold text-gray-700">Họ và Tên <span class="text-fptOrange">*</span></label>
+                            <input type="text" placeholder="Nhập họ và tên" class="w-full bg-white border border-gray-200 rounded-lg p-3.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-fptOrange focus:border-fptOrange transition shadow-sm placeholder-gray-400">
+                        </div>
+                        <div class="flex flex-col gap-2 text-left">
+                            <label class="text-[13px] font-bold text-gray-700">Số điện thoại <span class="text-fptOrange">*</span></label>
+                            <input type="text" placeholder="Nhập số điện thoại" class="w-full bg-white border border-gray-200 rounded-lg p-3.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-fptOrange focus:border-fptOrange transition shadow-sm placeholder-gray-400">
+                        </div>
+                        <div class="flex flex-col gap-2 text-left">
+                            <label class="text-[13px] font-bold text-gray-700">Email (nếu có)</label>
+                            <input type="email" placeholder="Nhập email" class="w-full bg-white border border-gray-200 rounded-lg p-3.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-fptOrange focus:border-fptOrange transition shadow-sm placeholder-gray-400">
+                        </div>
+                        <div class="flex flex-col gap-2 text-left">
+                            <label class="text-[13px] font-bold text-gray-700">Cơ sở <span class="text-fptOrange">*</span></label>
+                            <select class="w-full bg-white border border-gray-200 rounded-lg p-3.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-fptOrange focus:border-fptOrange transition shadow-sm text-gray-500">
+                                <option>Chọn Cơ sở</option>
+                                <option>Hà Nội</option>
+                                <option>Đà Nẵng</option>
+                                <option>TP. Hồ Chí Minh</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-2 text-left">
+                            <label class="text-[13px] font-bold text-gray-700">Chọn ngành đăng ký học <span class="text-fptOrange">*</span></label>
+                            <select class="w-full bg-white border border-gray-200 rounded-lg p-3.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-fptOrange focus:border-fptOrange transition shadow-sm text-gray-500">
+                                <option>Chọn Ngành học</option>
+                                <option>Công nghệ thông tin</option>
+                                <option>Thiết kế đồ họa</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-2 text-left">
+                            <label class="text-[13px] font-bold text-gray-700">Link Facebook (nếu có)</label>
+                            <input type="text" placeholder="Nhập link" class="w-full bg-white border border-gray-200 rounded-lg p-3.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-fptOrange focus:border-fptOrange transition shadow-sm placeholder-gray-400">
+                        </div>
+                    </div>
+                    <div class="mt-4 text-left">
+                        <p class="text-[12px] text-gray-500 italic leading-relaxed">
+                            *Đồng ý để dữ liệu cá nhân của Anh/Chị được thu thập trên trang này, được xử lý và lưu trữ bởi Trường Cao đẳng FPT Polytechnic (đơn vị thành viên của Công ty TNHH Giáo dục FPT hay còn gọi là Tổ chức giáo dục FPT) cho mục đích và theo điều kiện đã được công bố tại Quy định bảo vệ dữ liệu cá nhân của Tổ chức giáo dục FPT tại đây
+                        </p>
+                    </div>
+                    <button type="button" class="w-full bg-[#f97316] hover:bg-[#ea580c] text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-500/30 text-[16px] transition-colors duration-300 mt-2">
+                        GỬI THÔNG TIN
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="py-24 bg-white text-center overflow-hidden">
+            <div class="flex justify-center mb-6" data-aos="fade-up">
+                <div class="bg-gray-50 border border-gray-100 shadow-sm text-gray-500 rounded-full px-5 py-1.5 text-[14px] font-medium flex items-center gap-1.5">
+                    <span class="text-fptOrange font-bold">Tại sao</span> chọn <span class="text-fptBrightBlue font-bold">chúng tôi</span>
+                </div>
+            </div>
+            <h2 class="text-4xl md:text-[42px] font-black text-gray-800 mb-1 leading-tight" data-aos="fade-up" data-aos-delay="100">LÝ DO LỰA CHỌN</h2>
+            <h2 class="text-4xl md:text-[42px] font-black mb-16 leading-tight" data-aos="fade-up" data-aos-delay="200">
+                <span class="text-fptOrange">FPT POLY</span><span class="text-fptBrightBlue">TECHNIC</span>
+            </h2>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-4">
+                <div class="flex flex-col items-center group px-2" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="h-32 flex items-center justify-center mb-4 transform group-hover:-translate-y-3 transition-transform duration-500">
+                        <img src="src/why-icon1.svg" alt="97.7%" class="h-full object-contain">
+                    </div>
+                    <h4 class="text-[40px] font-black text-fptOrange mb-2">97,7%</h4>
+                    <p class="font-bold text-[18px] text-gray-900 mb-3 leading-snug">Sinh viên có việc<br>làm sau tốt nghiệp</p>
+                    <p class="text-[13px] text-gray-500 leading-relaxed">khẳng định chất lượng đào tạo gắn<br>với thực tiễn</p>
+                </div>
+                <div class="flex flex-col items-center group px-2" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="h-32 flex items-center justify-center mb-4 transform group-hover:-translate-y-3 transition-transform duration-500">
+                        <img src="src/why-icon2.svg" alt="2.000+" class="h-full object-contain">
+                    </div>
+                    <h4 class="text-[40px] font-black text-fptOrange mb-2">2.000+</h4>
+                    <p class="font-bold text-[18px] text-gray-900 mb-3 leading-snug">Doanh nghiệp<br>đối tác</p>
+                    <p class="text-[13px] text-gray-500 leading-relaxed">đồng hành trong đào tạo, thực tập<br>và tuyển dụng</p>
+                </div>
+                <div class="flex flex-col items-center group px-2" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="h-32 flex items-center justify-center mb-4 transform group-hover:-translate-y-3 transition-transform duration-500">
+                        <img src="src/why-icon3.svg" alt="40.000+" class="h-full object-contain">
+                    </div>
+                    <h4 class="text-[40px] font-black text-fptOrange mb-2">40.000+</h4>
+                    <p class="font-bold text-[18px] text-gray-900 mb-3 leading-snug">Sinh viên và<br>cựu sinh viên</p>
+                    <p class="text-[13px] text-gray-500 leading-relaxed">đang học tập, làm việc trong nhiều<br>lĩnh vực</p>
+                </div>
+                <div class="flex flex-col items-center group px-2" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="h-32 flex items-center justify-center mb-4 transform group-hover:-translate-y-3 transition-transform duration-500">
+                        <img src="src/why-icon4.svg" alt="13" class="h-full object-contain">
+                    </div>
+                    <h4 class="text-[40px] font-black text-fptOrange mb-2">13</h4>
+                    <p class="font-bold text-[18px] text-gray-900 mb-3 leading-snug">Cơ sở đào tạo<br>toàn quốc</p>
+                    <p class="text-[13px] text-gray-500 leading-relaxed px-2">Cao đẳng FPT Polytechnic tiên phong ứng dụng AI năm 2026, định hướng thực học – thực nghiệp, đáp ứng nhu cầu nhân lực thời đại mới</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="py-20 bg-gradient-to-b from-[#0096ff] to-[#00b4ff] text-center px-4 overflow-hidden">
+            <h2 class="text-3xl md:text-4xl font-black mb-10 drop-shadow-md leading-snug" data-aos="fade-down">
+                <span class="text-white block">CHƯƠNG TRÌNH ĐÀO TẠO</span>
+                <span class="text-[#ffde00] block mt-2">HỌC ĐỂ CÓ VIỆC LÀM NGAY</span>
+            </h2>
+            
+            <div class="max-w-4xl mx-auto flex flex-wrap justify-center gap-2 md:gap-3 mb-12" data-aos="fade-up">
+                <button class="bg-[#f27024] text-white px-5 py-2.5 rounded-full text-[13px] font-bold shadow-md hover:scale-105 transition">Công nghệ thông tin</button>
+                <button class="bg-[#4ebcff] text-white px-5 py-2.5 rounded-full text-[13px] font-semibold hover:bg-blue-400 hover:scale-105 transition shadow-sm">Công nghệ kỹ thuật Điện tử & Tự động hoá</button>
+                <button class="bg-[#4ebcff] text-white px-5 py-2.5 rounded-full text-[13px] font-semibold hover:bg-blue-400 hover:scale-105 transition shadow-sm">Quản trị kinh doanh</button>
+                <button class="bg-[#4ebcff] text-white px-5 py-2.5 rounded-full text-[13px] font-semibold hover:bg-blue-400 hover:scale-105 transition shadow-sm">Chăm sóc sức khoẻ và làm đẹp</button>
+                <button class="bg-[#4ebcff] text-white px-5 py-2.5 rounded-full text-[13px] font-semibold hover:bg-blue-400 hover:scale-105 transition shadow-sm">Ngành ngôn ngữ</button>
+                <button class="bg-[#4ebcff] text-white px-5 py-2.5 rounded-full text-[13px] font-semibold hover:bg-blue-400 hover:scale-105 transition shadow-sm">Ngành khác</button>
+            </div>
+
+            <div class="max-w-5xl mx-auto bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.2)] p-4 md:p-6" data-aos="fade-up">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2 bg-gradient-to-br from-[#ff8c42] to-[#f27024] rounded-3xl flex justify-center items-center p-8 relative overflow-hidden min-h-[350px] shadow-inner group">
+                        <div class="absolute -top-10 -left-10 w-40 h-40 bg-white opacity-20 rounded-full blur-2xl animate-float"></div>
+                        <div class="absolute bottom-10 right-10 w-32 h-32 bg-yellow-300 opacity-20 rounded-full blur-2xl animate-float-delayed"></div>
+                        <img src="src/program-img1.png" alt="IT" class="relative z-10 w-full max-w-sm object-contain transform group-hover:scale-105 transition duration-500 bg-transparent">
+                    </div>
+                    <div class="md:w-1/2 flex flex-col justify-center text-left py-4 md:pr-6">
+                        <h3 class="text-[28px] font-black text-[#f27024] mb-3">Công nghệ thông tin</h3>
+                        <p class="text-gray-600 text-[14px] leading-relaxed mb-6 text-justify">
+                            Ngành Công nghệ thông tin tại FPT Polytechnic cung cấp kiến thức và kỹ năng thực tiễn, giúp sinh viên trở thành những chuyên gia IT có thể cạnh tranh trên thị trường lao động.
+                        </p>
+                        <ul class="space-y-1 mb-6">
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-3 pt-2 cursor-pointer group transition-all">
+                                <span class="font-bold text-[14px] text-gray-700 group-hover:text-fptOrange transition">Phát triển phần mềm</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-fptOrange transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-3 pt-2 cursor-pointer group transition-all">
+                                <span class="font-bold text-[14px] text-gray-700 group-hover:text-fptOrange transition">Lập trình Web</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-fptOrange transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-3 pt-2 cursor-pointer group transition-all">
+                                <span class="font-bold text-[14px] text-gray-700 group-hover:text-fptOrange transition">Lập trình Game</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-fptOrange transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-3 pt-2 cursor-pointer group transition-all">
+                                <span class="font-bold text-[14px] text-gray-700 group-hover:text-fptOrange transition">Lập trình ứng dụng Trí tuệ nhân tạo</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-fptOrange transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-3 pt-2 cursor-pointer group transition-all">
+                                <span class="font-bold text-[14px] text-gray-700 group-hover:text-fptOrange transition">Ứng dụng phần mềm</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-fptOrange transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </li>
+                        </ul>
+                        <div class="mt-auto flex justify-end">
+                            <button class="bg-[#f27024] hover:bg-[#ea580c] text-white font-bold py-2.5 px-6 rounded-full text-[13px] flex items-center gap-2 shadow-md transition transform hover:scale-105">
+                                ĐĂNG KÝ NGAY
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div> 
+    
+    <footer class="bg-[#022156] text-white pt-12 pb-6 font-sans border-t-4 border-fptOrange">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-10">
+            
+            <div class="lg:w-1/4 shrink-0">
+                <img src="src/FPT_Polytechnic.png" alt="FPT Polytechnic" class="h-10 bg-white p-1.5 rounded mb-5" onerror="this.outerHTML='<h2 class=\'text-2xl font-black text-fptOrange mb-4 bg-white p-2 inline-block rounded\'>FPT POLYTECHNIC</h2>'">
+                <h3 class="text-fptOrange font-bold text-[15px] mb-4 uppercase tracking-wide">Thông liên hệ:</h3>
+                <div class="flex items-center gap-2 mb-3 text-[13px] text-gray-300 hover:text-white cursor-pointer transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-fptOrange shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    caodang@fpt.edu.vn
+                </div>
+                <div class="flex items-center gap-2 text-[13px] text-gray-300 hover:text-white cursor-pointer transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-fptOrange shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                    0981 725 836
+                </div>
+            </div>
+
+            <div class="lg:w-3/4">
+                <h3 class="text-fptOrange font-bold text-[16px] mb-6 uppercase border-b border-white/20 pb-3 w-full">Hệ thống văn phòng tuyển sinh</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                    
+                    <div class="flex flex-col gap-6">
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Hà Nội</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">Cổng phụ, Tòa nhà FPT Polytechnic, 13 Phố Trịnh Văn Bô, Phường Phương Canh, Nam Từ Liêm, TP Hà Nội<br>Hotline: 024 8582 0808<br>Email: caodangfpt.hn@fpt.edu.vn</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Thái Nguyên</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">Tòa nhà FPT Polytechnic, Tổ dân phố Nông Lâm, Phường Quang Trung, Thành phố Thái Nguyên<br>Hotline: 091 532 9213<br>Email: caodangfpt.tn@fpt.edu.vn</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Hải Phòng</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">118 Cát Bi, Phường Hải An, TP Hải Phòng<br>0915431313</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Hà Nam</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">Toà Gamma, Tổ hợp Giáo dục FPT Unischool, Khu Đại học Nam Cao, Phường Tiên Hiệp, TX Duy Tiên, Tỉnh Hà Nam<br>Hotline: 0911 968 213<br>Email: caodangfpt.hanam@fpt.edu.vn</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Thanh Hoá</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">Tòa Beta, Tổ hợp giáo dục FPT, Đại lộ Võ Nguyên Giáp, Phường Quảng Phú, Thành phố Thanh Hóa<br>091 378 5213</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Huế</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">Toà nhà Epsilon - Tổ hợp Giáo dục FPT Huế, Khu E - Khu đô thị mới An Vân Dương, Phường Thuỷ Thanh, TP Huế<br>088 853 7079</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-6">
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Hồ Chí Minh</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">Tòa nhà QTSC9 (toà T), đường Tô Ký, Phường Tân Chánh Hiệp, Quận 12, TP HCM<br>028 6686 6486</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Đà Nẵng</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">137 Nguyễn Thị Thập, Phường Thanh Khê Tây, Quận Thanh Khê, TP Đà Nẵng<br>Hotline: 023 6371 0999 - 094 302 5282<br>Email: caodangfpt.dn@fpt.edu.vn</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Quy Nhơn</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">107A Thanh Niên, Phường Quang Trung, TP Quy Nhơn, Tỉnh Bình Định<br>039 404 4568</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Tây Nguyên</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">99 Nguyễn Văn Linh, Phường Tân An, TP Buôn Ma Thuột, Tỉnh Đắk Lắk<br>Hotline: 0262 3555 678<br>Email: caodangfpt.daklak@fpt.edu.vn</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Đồng Nai</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">193 Đỗ Văn Thi, phường Hiệp Hòa, TP Biên Hòa, tỉnh Đồng Nai<br>0345 690 031 - 0989 871 031</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Cần Thơ</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">Tòa nhà FPT Polytechnic, đường số 22, Phường Thường Thạnh, Quận Cái Răng, TP Cần Thơ<br>098 388 1100</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[14px] mb-1.5 text-white">Cơ sở Vĩnh Phúc</h4>
+                            <p class="text-[12px] text-gray-300 leading-relaxed">Số 43 đường Chu Văn An, phường Liên Bảo, Vĩnh Yên, tỉnh Vĩnh Phúc<br>098 172 5836</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="bg-[#00b4ff] text-white py-3">
+        <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-6 text-[13px] font-bold">
+            <a href="#" class="flex items-center gap-1.5 hover:opacity-80 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg> Quy chế tuyển sinh
+            </a>
+            <a href="#" class="flex items-center gap-1.5 hover:opacity-80 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> Nộp Hồ Sơ Online
+            </a>
+            <a href="#" class="flex items-center gap-1.5 hover:opacity-80 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg> Đăng ký xét tuyển
+            </a>
+            <a href="#" class="flex items-center gap-1.5 hover:opacity-80 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg> Inbox tư vấn
+            </a>
+        </div>
+    </div>
+
+
+    <div id="chat-box" class="fixed bottom-24 left-6 z-[95] w-80 bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 transform scale-0 origin-bottom-left opacity-0 border border-gray-100">
+        <div class="bg-gradient-to-r from-fptBrightBlue to-blue-500 p-4 flex justify-between items-center text-white">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-fptOrange font-black text-lg shadow-sm">F</div>
+                <div>
+                    <h4 class="font-bold text-sm leading-tight">Tư vấn viên FPT Poly</h4>
+                    <p class="text-xs text-blue-100 flex items-center gap-1 mt-0.5"><span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Đang trực tuyến</p>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="hover:bg-blue-600 p-1.5 rounded-full transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+            </button>
+        </div>
+        <div class="h-64 p-4 bg-gray-50 overflow-y-auto flex flex-col gap-3">
+            <div class="text-xs text-center text-gray-400 mb-2">Hôm nay 08:30</div>
+            <div class="flex gap-2 items-end">
+                <div class="w-8 h-8 rounded-full bg-fptBrightBlue text-white flex items-center justify-center text-xs shrink-0 font-bold shadow-sm">F</div>
+                <div class="bg-white border border-gray-100 p-3 rounded-2xl rounded-bl-none text-sm text-gray-700 max-w-[85%] shadow-sm leading-relaxed">
+                    Chào bạn! Cảm ơn bạn đã quan tâm đến FPT Polytechnic. Mình có thể hỗ trợ thông tin gì cho bạn hôm nay ạ? 😊
+                </div>
+            </div>
+        </div>
+        <div class="p-3 bg-white border-t border-gray-100 flex items-center gap-2">
+            <input type="text" placeholder="Nhập tin nhắn..." class="w-full bg-gray-100 border border-transparent rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-fptBrightBlue focus:bg-white transition">
+            <button class="w-10 h-10 shrink-0 bg-fptBrightBlue text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+            </button>
+        </div>
+    </div>
+
+
+    <div id="modal-overlay" class="fixed inset-0 z-[100] bg-[#0a325a]/70 hidden items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <div id="modal-box" class="relative bg-white w-[90%] max-w-4xl rounded-3xl flex flex-col md:flex-row overflow-hidden transform scale-95 transition-transform duration-300 shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-8 h-8 bg-[#1d2440] text-white rounded-full flex items-center justify-center hover:bg-gray-700 transition shadow hover:rotate-90">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+            </button>
+            <div class="md:w-1/2 relative bg-blue-100 min-h-[200px] md:min-h-full overflow-hidden">
+                <img src="src/popup-banner.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Banner">
+                <div class="absolute inset-0 flex items-center justify-center text-center p-6 bg-gradient-to-br from-[#2bb6ff] to-[#1b75bc] text-white z-10 opacity-90">
+                    <div>
+                        <h2 class="font-black text-2xl mb-1 text-yellow-300 uppercase drop-shadow-md">CHÍNH THỨC</h2>
+                        <h3 class="font-black text-4xl mb-4 uppercase drop-shadow-md">MỞ KHÓA TUYỂN SINH</h3>
+                        <p class="font-bold text-xl uppercase bg-fptOrange inline-block px-4 py-1 rounded-full shadow">THÁNG 5/2026</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center bg-white">
+                <h2 class="text-[22px] font-black text-fptOrange text-center mb-6 uppercase tracking-wide">ĐĂNG KÝ NHẬN THÔNG TIN</h2>
+                <form class="space-y-4 text-sm">
+                    <div><input type="text" placeholder="Họ và tên *" class="w-full border border-gray-200 rounded-lg p-2.5 focus:outline-none focus:border-fptOrange focus:ring-1 focus:ring-fptOrange transition bg-gray-50"></div>
+                    <div><input type="text" placeholder="Số điện thoại *" class="w-full border border-gray-200 rounded-lg p-2.5 focus:outline-none focus:border-fptOrange focus:ring-1 focus:ring-fptOrange transition bg-gray-50"></div>
+                    <div><input type="email" placeholder="Email *" class="w-full border border-gray-200 rounded-lg p-2.5 focus:outline-none focus:border-fptOrange focus:ring-1 focus:ring-fptOrange transition bg-gray-50"></div>
+                    <div class="flex items-start gap-2 mt-4">
+                        <input type="checkbox" id="dongy" class="mt-1 accent-fptOrange cursor-pointer">
+                        <label for="dongy" class="text-xs text-gray-500 leading-tight cursor-pointer">Đồng ý xử lý dữ liệu bởi FPT Polytechnic.</label>
+                    </div>
+                    <button type="button" class="w-full bg-orange-gradient text-white font-bold text-lg py-3 rounded-xl shadow-lg mt-4 hover:opacity-90 btn-glow transition transform hover:scale-[1.02]">Đăng ký ngay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div onclick="toggleChat()" class="fixed bottom-6 left-6 z-[90] flex items-center gap-3 cursor-pointer group">
+        <div class="relative flex items-center justify-center w-12 h-12 bg-red-100 border-2 border-white rounded-full shadow-md animate-bounce group-hover:animate-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+        </div>
+        <div class="bg-white rounded-full shadow-lg flex items-center p-1.5 pr-2 transform transition-transform group-hover:scale-105 origin-left">
+            <div class="flex flex-col px-3 text-[13px] leading-tight text-fptBrightBlue">
+                <span class="font-bold">Bạn cần hỗ trợ,</span><span class="font-medium">hãy chat với chúng tôi!</span>
+            </div>
+            <div class="w-10 h-10 bg-fptBrightBlue rounded-full flex items-center justify-center text-white relative">
+                <div class="absolute -bottom-1 -left-1 w-4 h-4 bg-fptBrightBlue rounded-sm rotate-45"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+            </div>
+        </div>
+    </div>
+
+    <div onclick="openModal()" class="fixed top-[60%] right-0 z-[90] bg-orange-gradient text-white font-bold py-3.5 px-6 rounded-l-full shadow-[0_10px_25px_rgba(243,111,33,0.5)] cursor-pointer transform translate-x-2 hover:translate-x-0 transition-transform duration-300 flex items-center gap-2 group">
+        <span class="uppercase tracking-wide text-[14px]">Đăng ký tư vấn</span>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 800 });
+
+        function chuyenTrang() {
+            var trangTinTuc = document.getElementById('trang-tin-tuc');
+            var trangLanding = document.getElementById('trang-landing-page');
+            
+            if (trangTinTuc.classList.contains('block')) {
+                trangTinTuc.classList.replace('block', 'hidden');
+                trangLanding.classList.replace('hidden', 'block');
+            } else {
+                trangLanding.classList.replace('block', 'hidden');
+                trangTinTuc.classList.replace('hidden', 'block');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => { AOS.refresh(); }, 100);
+        }
+
+        function toggleChat() {
+            const chatBox = document.getElementById('chat-box');
+            if (chatBox.classList.contains('scale-0')) {
+                chatBox.classList.remove('scale-0', 'opacity-0');
+                chatBox.classList.add('scale-100', 'opacity-100');
+            } else {
+                chatBox.classList.remove('scale-100', 'opacity-100');
+                chatBox.classList.add('scale-0', 'opacity-0');
+            }
+        }
+
+        function openModal() {
+            const overlay = document.getElementById('modal-overlay');
+            const box = document.getElementById('modal-box');
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+            void overlay.offsetWidth; 
+            overlay.classList.remove('opacity-0');
+            box.classList.remove('scale-95');
+            box.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modal-overlay');
+            const box = document.getElementById('modal-box');
+            overlay.classList.add('opacity-0');
+            box.classList.remove('scale-100');
+            box.classList.add('scale-95');
+            setTimeout(() => { overlay.classList.remove('flex'); overlay.classList.add('hidden'); }, 300);
+        }
+
+        window.onload = function() {
+            setTimeout(function() { openModal(); }, 1000); 
+        };
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let slideInterval;
+
+        function updateSlider() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('opacity-100', 'z-10');
+                slide.classList.add('opacity-0', 'z-0');
+                dots[index].classList.remove('bg-fptOrange', 'w-8');
+                dots[index].classList.add('bg-white');
+            });
+            slides[currentSlide].classList.remove('opacity-0', 'z-0');
+            slides[currentSlide].classList.add('opacity-100', 'z-10');
+            dots[currentSlide].classList.remove('bg-white');
+            dots[currentSlide].classList.add('bg-fptOrange', 'w-8');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlider();
+            resetInterval();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlider();
+            resetInterval();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+            resetInterval();
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 4000);
+        }
+        
+        resetInterval();
+
+        // SCRIPTS CHO YOUTUBE THUMBNAIL CLICK-TO-PLAY
+        function playMainVideo() {
+            document.getElementById('main-video-thumb').classList.add('hidden');
+            document.getElementById('main-video-iframe-container').classList.remove('hidden', 'z-0');
+            document.getElementById('main-video-iframe-container').classList.add('z-20');
+            document.getElementById('main-video-iframe').src = "https://www.youtube.com/embed/6ezgcBs8HFo?autoplay=1";
+        }
+
+        function playSideVideo() {
+            document.getElementById('side-video-thumb').classList.add('hidden');
+            document.getElementById('side-video-iframe-container').classList.remove('hidden', 'z-0');
+            document.getElementById('side-video-iframe-container').classList.add('z-20');
+            document.getElementById('side-video-iframe').src = "https://www.youtube.com/embed/Wxiwx-L6R0s?autoplay=1";
+        }
+    </script>
+</body>
+</html>
